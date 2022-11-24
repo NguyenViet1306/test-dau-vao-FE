@@ -1,0 +1,129 @@
+<section>
+  <!--for demo wrap-->
+  <h1>Quản Lý Công Ty</h1>
+  <div class="input-group mb-3">
+    <input id="search" type="text" class="form-control" placeholder="Tìm kiếm"
+           aria-label="Recipient's username" aria-describedby="button-addon2">
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Tìm kiếm
+    </button>
+  </div>
+  <button (click)="displayCompanies()" class="btn btn-primary">
+    Tất cả Công ty
+  </button>
+  <button (click)="displayFormCreate()" style="margin-left: 2px " type="button" class="btn btn-primary">
+    Tạo mới Công ty
+  </button>
+  <br>
+  <div id="get_by_brands">
+
+  </div>
+
+
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+      <tr>
+        <th>STT</th>
+        <th>Tên công ty</th>
+        <th>Địa chỉ</th>
+        <th>Người đại diện</th>
+        <th style="text-align: center">Hành động</th>
+      </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="list-companies" class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+      <tr *ngFor="let c of companies, index as i">
+        <td>{{i + 1}}</td>
+        <td>{{c.name}}</td>
+        <td>{{c.address}}</td>
+        <td>{{c.customer}}</td>
+        <td>
+          <button class="btn btn-danger">Xem</button>
+          <button style="margin: 1px" class="btn btn-danger" (click)="updateForm(c.id)">Sửa</button>
+          <button class="btn btn-danger" (click)="deleteCompany(c.id)">Xóa</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- The Modal Create And Update -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 id="titleFrom" class="modal-title"></h4>
+        <button type="button" class="btn-close" (click)="closeFromCreate()"></button>
+      </div>
+
+      <!-- Modal body -->
+      <form [formGroup]="companyForm" enctype="multipart/form-data">
+        <table class="modal-body">
+          <tr>
+            <td>
+              <input id="name" formControlName="name" type="text">
+              Tên
+            </td>
+
+          </tr>
+          <tr>
+            <td>
+              <input id="address" formControlName="address" type="text">
+              Địa chỉ
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input id="customer" formControlName="customer" type="text">
+              Người địa diện
+            </td>
+          </tr>
+          <tr>
+            <td id="messageCreate">
+            </td>
+          </tr>
+        </table>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button (click)="createCompany()" hidden id="buttonCreate" class="btn btn-danger">Tạo mới công ty</button>
+          <button type="reset" hidden id="rest" class="btn btn-danger">Tạo mới công ty</button>
+          <button (click)="updateCompany()" hidden id="buttonUpdate" class="btn btn-danger">Chỉnh sửa công ty</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- End Modal Create And Update -->
+<!--Detail-->
+<div class="modal" id="detailModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 id="titleFromDetail" class="modal-title">Thông tin công ty</h4>
+        <button (click)="closeFromCreate()" type="button" class="btn-close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+          <div style="font-size: 20px" id="nameDetail">
+          </div>
+          <div style="font-size: 20px" id="addressDetail">
+          </div>
+          <div style="font-size: 20px" id="customerDetail">
+          </div>
+
+        </form>
+
+      </div>
+      <!-- Modal body -->
+    </div>
+  </div>
+</div>
+<!--End detail-->
