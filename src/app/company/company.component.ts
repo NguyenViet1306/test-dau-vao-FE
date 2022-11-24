@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Company} from "../../model/Company";
+import {Company} from "../model/Company";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {CompanyService} from "../../service/Company.service";
+import {CompanyService} from "../service/Company.service";
 import Swal from 'sweetalert2';
 
 @Component({
@@ -32,6 +32,7 @@ export class CompanyComponent implements OnInit {
   displayCompanies() {
     this.companyService.findAll().subscribe(value => {
       this.companies = value
+      console.log(value)
     })
   }
 
