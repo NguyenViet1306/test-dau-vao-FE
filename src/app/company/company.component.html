@@ -4,7 +4,7 @@
   <div class="input-group mb-3">
     <input id="search" type="text" class="form-control" placeholder="Tìm kiếm"
            aria-label="Recipient's username" aria-describedby="button-addon2">
-    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Tìm kiếm
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchCompany()">Tìm kiếm
     </button>
   </div>
   <button (click)="displayCompanies()" class="btn btn-primary">
@@ -14,9 +14,9 @@
     Tạo mới Công ty
   </button>
   <br>
-<!--  <div id="get_by_brands">-->
+  <div id="get_by_brands">
 
-<!--  </div>-->
+  </div>
 
 
   <div class="tbl-header">
@@ -63,25 +63,22 @@
       </div>
 
       <!-- Modal body -->
-      <form [formGroup]="companyForm" enctype="multipart/form-data">
+      <form [formGroup]="companyForm" >
         <table class="modal-body">
           <tr>
-            <td>
+            <td>Tên công ty
               <input id="name" formControlName="name" type="text">
-              Tên
             </td>
 
           </tr>
           <tr>
-            <td>
+            <td>Địa chỉ
               <input id="address" formControlName="address" type="text">
-              Địa chỉ
             </td>
           </tr>
           <tr>
-            <td>
+            <td>Người địa diện
               <input id="customer" formControlName="customer" type="text">
-              Người địa diện
             </td>
           </tr>
           <tr>

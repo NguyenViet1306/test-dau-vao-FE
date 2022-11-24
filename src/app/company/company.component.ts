@@ -194,4 +194,14 @@ export class CompanyComponent implements OnInit {
     })
   }
 
+  searchCompany() {
+    // @ts-ignore
+    let name = document.getElementById("search").value
+      this.companyService.findName(name).subscribe(value => {
+        this.companies = value
+        console.log(value)
+      })
+  }
+
+
 }

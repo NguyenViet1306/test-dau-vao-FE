@@ -12,24 +12,26 @@ export class CompanyService {
   }
 
   findAll(): Observable<Company[]> {
-    return this.httpClient.get<Company[]>("http://localhost:8081/api")
+    return this.httpClient.get<Company[]>("http://localhost:8081/api");
   }
 
   findOne(id?: number): Observable<Company> {
-    return this.httpClient.get<Company>("http://localhost:8081/api/" + id)
+    return this.httpClient.get<Company>("http://localhost:8081/api/" + id);
   }
 
   create(company?: Company): Observable<Company> {
     return this.httpClient.post<Company>("http://localhost:8081/api", company);
   }
 
-  update(id?: number, company?: Company): Observable<Company> {
-    return this.httpClient.put<Company>("http://localhost:8081/api/update/" + id, company);
+  update(company?: Company): Observable<Company> {
+    return this.httpClient.put<Company>("http://localhost:8081/api/update", company);
   }
 
   delete(id?: number): Observable<Company> {
     return this.httpClient.delete<Company>("http://localhost:8081/api/delete/" + id);
   }
 
-
+  findName(name?: string): Observable<Company[]> {
+    return this.httpClient.get<Company[]>("http://localhost:8081/api/findCompanyByName/" + name)
+  }
 }
