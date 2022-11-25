@@ -19,7 +19,7 @@ export class CompanyService {
     return this.httpClient.get<Company>("http://localhost:8081/api/" + id);
   }
 
-  create(company?: Company): Observable<Company> {
+  create(company?: any): Observable<Company> {
     return this.httpClient.post<Company>("http://localhost:8081/api", company);
   }
 
