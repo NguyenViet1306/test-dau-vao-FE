@@ -29,6 +29,8 @@ export class DeleteComponent implements OnInit, OnChanges {
   delete(){
     this.companyService.delete(this.id).subscribe()
     this.router.navigate(["/"]);
+
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -36,6 +38,8 @@ export class DeleteComponent implements OnInit, OnChanges {
       this.id = paramMap.get('id');
       this.companyService.findOne(this.id).subscribe((data)=>{
         this.company = data
+        window.location.reload()
+
       })
     })
   }

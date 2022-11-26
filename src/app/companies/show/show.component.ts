@@ -24,11 +24,6 @@ export class ShowComponent implements OnInit {
     })
   }
 
-  findName() {
-     let name = document.getElementById("search")
-    // @ts-ignore
-    this.companyService.findName(name).subscribe()
-  }
 
 
 }
