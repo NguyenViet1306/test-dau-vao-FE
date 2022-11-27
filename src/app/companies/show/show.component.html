@@ -49,11 +49,12 @@
           <div class="col-sm-6">
             <a routerLink="create" class="btn" style="color: black;background: #03A9F4"> <span>Thêm mới</span></a>
           </div>
-          <!--          <div class="col-sm-6">-->
-          <!--            <input id="search">-->
-          <!--            <button (click)="findName()">Tìm Kiếm</button>-->
-          <!--          </div>-->
+          <br>
+          <div class="col-sm-6">
+            <input id="search" style="width: 80%" ><button (click)="findCompanyByName()">Tìm Kiếm</button>
 
+          </div>
+          <br>
         </div>
       </div>
       <table class="table table-striped table-hover">
@@ -97,6 +98,34 @@
   </div>
 </div>
 <!-- Edit Modal HTML -->
+
+<!--<div class="paginatoin-area">-->
+<!--  <div class="row">-->
+<!--    <div class="col-lg-6 col-md-6 pt-xs-15">-->
+<!--      <p>Hiển thị 1- {{tableSize}} trong {{companies.length}} Công ty</p>-->
+<!--    </div>-->
+<!--    <div class="col-lg-6 col-md-6">-->
+<!--      <ul class="pagination-box pt-xs-20 pb-xs-15">-->
+<!--        <div class="d-flex justify-content-center">-->
+<!--          <mat-form-field appearance="fill">-->
+<!--            <mat-label>Lựa chọn</mat-label>-->
+<!--            <mat-select>-->
+<!--              <mat-option *ngFor="let food of tableSizes" [value]="food" (click)="changeTableSize(food)">-->
+<!--                {{food}}-->
+<!--              </mat-option>-->
+<!--            </mat-select>-->
+<!--          </mat-form-field>-->
+<!--          <pagination-controls-->
+<!--            previousLabel="Trước"-->
+<!--            nextLabel="Sau"-->
+<!--            (pageChange)="page = $event"-->
+<!--          >-->
+<!--          </pagination-controls>-->
+<!--        </div>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
 <!-- Edit Modal HTML -->
 <div id="editEmployeeModal" class="modal fade">

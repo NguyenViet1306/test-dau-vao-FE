@@ -29,9 +29,9 @@ export class DeleteComponent implements OnInit, OnChanges {
   delete(){
     this.companyService.delete(this.id).subscribe()
     this.router.navigate(["/"]);
-
-
+    
   }
+
 
   ngOnChanges(changes: SimpleChanges): void {
     this.route.paramMap.subscribe(paramMap => {

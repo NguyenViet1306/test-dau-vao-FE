@@ -10,8 +10,13 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class ShowComponent implements OnInit {
   companies: Company[] = []
+  page: number = 1;
+  count: number = 0;
+  tableSize: number | undefined = 3;
+  tableSizes: any = [3, 6, 9];
+
   constructor(private companyService: CompanyService,
-              ) {
+  ) {
   }
 
   ngOnInit(): void {
@@ -19,11 +24,38 @@ export class ShowComponent implements OnInit {
   }
 
   display() {
-    this.companyService.findAll().subscribe((data) => {
-      this.companies = data
+    this.companyService.findAll().subscribe((value) => {
+      this.companies = value
     })
   }
 
+  findCompanyByName() {
+    // @ts-ignore
+    let name = document.getElementById("search").value
+    if (name == null) {
+      this.display()
+    } else {
+      this.companyService.findName(name).subscribe(value => {
+        // @ts-ignore
+       this.companies = value
+      })
+    }
+  }
 
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.display();
+  }
+
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.display();
+  }
+
+
+  changeTableSize(size?: number) {
+    this.tableSize = size
+  }
 
 }

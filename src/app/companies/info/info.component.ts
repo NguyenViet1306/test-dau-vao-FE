@@ -21,7 +21,6 @@ export class InfoComponent implements OnInit {
       this.id = paramMap.get('id');
       this.companyService.findOne(this.id).subscribe((data)=>{
         this.company = data
-        console.log(data)
       })
     })
 
