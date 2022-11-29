@@ -1,7 +1,9 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit, SimpleChanges} from '@angular/core';
 import {CompanyService} from "../../service/Company.service";
 import {Company} from "../../model/Company";
 import {ActivatedRoute, Router} from "@angular/router";
+import {MatTableDataSource} from "@angular/material/table";
+import {SelectionModel} from "@angular/cdk/collections";
 
 @Component({
   selector: 'app-show',
@@ -10,14 +12,16 @@ import {ActivatedRoute, Router} from "@angular/router";
 })
 export class ShowComponent implements OnInit {
   companies: Company[] = []
+  p!: number
   page: number = 1;
   count: number = 0;
-  tableSize: number | undefined = 3;
+  tableSize: number | undefined = 1;
   tableSizes: any = [3, 6, 9];
 
-  constructor(private companyService: CompanyService,
-  ) {
-  }
+  displayedColumns: string[] = ['id', 'name', 'customer', 'address', 'info'];
+  dataSource: Company[] = []
+
+  constructor(private companyService: CompanyService) {}
 
   ngOnInit(): void {
     this.display()
@@ -25,9 +29,11 @@ export class ShowComponent implements OnInit {
 
   display() {
     this.companyService.findAll().subscribe((value) => {
-      this.companies = value
+      this.companies = value;
+      this.dataSource = value;
     })
   }
+
 
   findCompanyByName() {
     // @ts-ignore

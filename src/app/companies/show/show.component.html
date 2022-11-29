@@ -1,41 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Danh sách Công ty</title>
+  <title>Title</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
-
-  <script>
-    $(document).ready(function () {
-      // Activate tooltip
-      $('[data-toggle="tooltip"]').tooltip();
-
-      // Select/Deselect checkboxes
-      var checkbox = $('table tbody input[type="checkbox"]');
-      $("#selectAll").click(function () {
-        if (this.checked) {
-          checkbox.each(function () {
-            this.checked = true;
-          });
-        } else {
-          checkbox.each(function () {
-            this.checked = false;
-          });
-        }
-      });
-      checkbox.click(function () {
-        if (!this.checked) {
-          $("#selectAll").prop("checked", false);
-        }
-      });
-    });
-  </script>
 </head>
 <body>
 <div class="container-xl">
@@ -51,7 +22,8 @@
           </div>
           <br>
           <div class="col-sm-6">
-            <input id="search" style="width: 80%" ><button (click)="findCompanyByName()">Tìm Kiếm</button>
+            <input id="search" style="width: 80%">
+            <button (click)="findCompanyByName()">Tìm Kiếm</button>
 
           </div>
           <br>
@@ -69,7 +41,8 @@
           <th>Chi tiết</th>
         </tr>
         </thead>
-        <tbody *ngFor="let c of companies,index as i">
+        <tbody
+          *ngFor="let c of companies | paginate: {itemsPerPage: tableSize, currentPage: page, totalItems: count } ,index as i">
         <tr>
           <td>
             {{i + 1}}
@@ -94,95 +67,54 @@
         </tr>
         </tbody>
       </table>
+      <pagination-controls previousLabel=""
+                           nextLabel=""
+                           (pageChange)="onTableDataChange($event)"
+                           style="text-align: right">
+      </pagination-controls>
     </div>
   </div>
 </div>
-<!-- Edit Modal HTML -->
 
-<!--<div class="paginatoin-area">-->
-<!--  <div class="row">-->
-<!--    <div class="col-lg-6 col-md-6 pt-xs-15">-->
-<!--      <p>Hiển thị 1- {{tableSize}} trong {{companies.length}} Công ty</p>-->
-<!--    </div>-->
-<!--    <div class="col-lg-6 col-md-6">-->
-<!--      <ul class="pagination-box pt-xs-20 pb-xs-15">-->
-<!--        <div class="d-flex justify-content-center">-->
-<!--          <mat-form-field appearance="fill">-->
-<!--            <mat-label>Lựa chọn</mat-label>-->
-<!--            <mat-select>-->
-<!--              <mat-option *ngFor="let food of tableSizes" [value]="food" (click)="changeTableSize(food)">-->
-<!--                {{food}}-->
-<!--              </mat-option>-->
-<!--            </mat-select>-->
-<!--          </mat-form-field>-->
-<!--          <pagination-controls-->
-<!--            previousLabel="Trước"-->
-<!--            nextLabel="Sau"-->
-<!--            (pageChange)="page = $event"-->
-<!--          >-->
-<!--          </pagination-controls>-->
-<!--        </div>-->
-<!--      </ul>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+<!--<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">-->
 
-<!-- Edit Modal HTML -->
-<div id="editEmployeeModal" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form>
-        <div class="modal-header">
-          <h4 class="modal-title">Edit Employee</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label>Name</label>
-            <input type="text" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label>Address</label>
-            <textarea class="form-control" required></textarea>
-          </div>
-          <div class="form-group">
-            <label>Phone</label>
-            <input type="text" class="form-control" required>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-          <input type="submit" class="btn btn-info" value="Save">
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
-<!-- Delete Modal HTML -->
-<div id="deleteEmployeeModal" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form>
-        <div class="modal-header">
-          <h4 class="modal-title">Delete Employee</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure you want to delete these Records?</p>
-          <p class="text-warning"><small>This action cannot be undone.</small></p>
-        </div>
-        <div class="modal-footer">
-          <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-          <input type="submit" class="btn btn-danger" value="Delete">
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+<!--  &lt;!&ndash;- Note that these columns can be defined in any order.-->
+<!--        The actual rendered columns are set as a property on the row definition" &ndash;&gt;-->
+
+<!--  &lt;!&ndash; Position Column &ndash;&gt;-->
+<!--  <ng-container matColumnDef="id">-->
+<!--    <th mat-header-cell *matHeaderCellDef> No. </th>-->
+<!--    <td mat-cell *matCellDef="let element"> {{element.id}} </td>-->
+<!--  </ng-container>-->
+
+<!--  &lt;!&ndash; Name Column &ndash;&gt;-->
+<!--  <ng-container matColumnDef="name">-->
+<!--    <th mat-header-cell *matHeaderCellDef> Tên công ty </th>-->
+<!--    <td mat-cell *matCellDef="let element"> {{element.name}} </td>-->
+<!--  </ng-container>-->
+
+<!--  &lt;!&ndash; Symbol Column &ndash;&gt;-->
+<!--  <ng-container matColumnDef="customer">-->
+<!--    <th mat-header-cell *matHeaderCellDef> Người đại diện pháp lý </th>-->
+<!--    <td mat-cell *matCellDef="let element"> {{element.customer}} </td>-->
+<!--  </ng-container>-->
+<!--  -->
+<!--  &lt;!&ndash; Weight Column &ndash;&gt;-->
+<!--  <ng-container matColumnDef="address">-->
+<!--    <th mat-header-cell *matHeaderCellDef> Địa chỉ công ty </th>-->
+<!--    <td mat-cell *matCellDef="let element"> {{element.address}} </td>-->
+<!--  </ng-container>-->
+
+
+<!--  <ng-container>-->
+<!--    <th>Thao tác-->
+<!--    </th>-->
+<!--  </ng-container>-->
+
+<!--  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
+<!--  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
+<!--</table>-->
+
+
 </body>
-</html>
 

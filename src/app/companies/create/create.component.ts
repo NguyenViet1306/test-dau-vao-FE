@@ -27,6 +27,5 @@ export class CreateComponent implements OnInit {
     this.companyService.create(this.createForm.value).subscribe()
     this.createForm.reset()
     this.router.navigate(["/"]);
-
   }
 }
