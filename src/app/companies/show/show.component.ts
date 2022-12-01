@@ -1,27 +1,30 @@
-import {Component, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CompanyService} from "../../service/Company.service";
 import {Company} from "../../model/Company";
-import {ActivatedRoute, Router} from "@angular/router";
-import {MatTableDataSource} from "@angular/material/table";
+import {SlideInOutAnimation} from '../../animations';
 import {SelectionModel} from "@angular/cdk/collections";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-show',
   templateUrl: './show.component.html',
-  styleUrls: ['./show.component.css']
+  styleUrls: ['./show.component.css'],
+  animations: [SlideInOutAnimation]
 })
 export class ShowComponent implements OnInit {
   companies: Company[] = []
   p!: number
   page: number = 1;
   count: number = 0;
-  tableSize: number | undefined = 1;
+  tableSize: number | undefined = 2;
   tableSizes: any = [3, 6, 9];
+  animationState = 'out';
+  classToggle = 'close'
 
-  displayedColumns: string[] = ['id', 'name', 'customer', 'address', 'info'];
-  dataSource: Company[] = []
 
-  constructor(private companyService: CompanyService) {}
+
+  constructor(private companyService: CompanyService) {
+  }
 
   ngOnInit(): void {
     this.display()
@@ -30,10 +33,9 @@ export class ShowComponent implements OnInit {
   display() {
     this.companyService.findAll().subscribe((value) => {
       this.companies = value;
-      this.dataSource = value;
+      // this.dataSource = value;
     })
   }
-
 
   findCompanyByName() {
     // @ts-ignore
@@ -43,7 +45,7 @@ export class ShowComponent implements OnInit {
     } else {
       this.companyService.findName(name).subscribe(value => {
         // @ts-ignore
-       this.companies = value
+        this.companies = value
       })
     }
   }
@@ -62,6 +64,15 @@ export class ShowComponent implements OnInit {
 
   changeTableSize(size?: number) {
     this.tableSize = size
+  }
+
+  toggleShowDiv(divName: string) {
+    if (divName === 'divA') {
+      console.log(this.animationState);
+      this.animationState = this.animationState === 'out' ? 'in' : 'out';
+      console.log(this.animationState);
+      this.classToggle = this.animationState == 'out' ? 'close' : 'open'
+    }
   }
 
 }
