@@ -23,8 +23,8 @@ export class CompanyService {
     return this.httpClient.post<Company>("http://localhost:8081/api", company);
   }
 
-  update(company?: Company): Observable<Company> {
-    return this.httpClient.put<Company>("http://localhost:8081/api/update", company);
+  update(id?: number ,company?: Company): Observable<Company> {
+    return this.httpClient.put<Company>("http://localhost:8081/api/update/"+ id , company);
   }
 
   delete(id?: number): Observable<Company> {

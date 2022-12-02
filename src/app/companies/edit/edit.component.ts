@@ -34,8 +34,7 @@ export class EditComponent implements OnInit {
   }
 
   edit() {
-    this.companyService.update(this.editForm.value).subscribe();
-    this.editForm.reset()
+    this.companyService.update(this.id ,this.editForm.value).subscribe();
     this.router.navigate(["/"]);
   }
 }

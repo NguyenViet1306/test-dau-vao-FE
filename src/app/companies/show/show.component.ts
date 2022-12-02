@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {CompanyService} from "../../service/Company.service";
 import {Company} from "../../model/Company";
 import {SlideInOutAnimation} from '../../animations';
-import {SelectionModel} from "@angular/cdk/collections";
 import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
@@ -16,12 +15,11 @@ export class ShowComponent implements OnInit {
   p!: number
   page: number = 1;
   count: number = 0;
-  tableSize: number | undefined = 2;
+  tableSize: number | undefined = 3;
   tableSizes: any = [3, 6, 9];
   animationState = 'out';
   classToggle = 'close'
-
-
+  dataSource: Company[]=[]
 
   constructor(private companyService: CompanyService) {
   }
@@ -33,7 +31,7 @@ export class ShowComponent implements OnInit {
   display() {
     this.companyService.findAll().subscribe((value) => {
       this.companies = value;
-      // this.dataSource = value;
+      this.dataSource = value;
     })
   }
 
@@ -68,11 +66,10 @@ export class ShowComponent implements OnInit {
 
   toggleShowDiv(divName: string) {
     if (divName === 'divA') {
-      console.log(this.animationState);
       this.animationState = this.animationState === 'out' ? 'in' : 'out';
-      console.log(this.animationState);
       this.classToggle = this.animationState == 'out' ? 'close' : 'open'
     }
   }
+
 
 }

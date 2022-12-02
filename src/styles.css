@@ -112,3 +112,9 @@ body {
   margin: -18px 16px 0 5px;
 }
 
+.class_search {
+  margin: 0px 0px 0px -34px;
+  background-color: white;
+  border-bottom: #ccc;
+  border: solid 0px;
+}

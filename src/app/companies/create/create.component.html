@@ -17,17 +17,17 @@
   <form style="width: 500px" [formGroup]="createForm" (ngSubmit)="create()">
     <div class="form-group">
       <label>Tên công ty </label>
-      <input class="form-control" placeholder="Name" formControlName="name">
+      <input class="form-control" formControlName="name">
     </div>
     <div class="form-group">
       <label>Địa chỉ</label>
-      <input class="form-control" placeholder=" Address" formControlName="address">
+      <input class="form-control" formControlName="address">
     </div>
     <div class="form-group">
-      <label>Người đại diện</label>
-      <input class="form-control" placeholder="Customer" formControlName="customer">
+      <label>Người địa diện pháp lý</label>
+      <input class="form-control" formControlName="customer">
     </div>
-    <button type="submit" class="btn btn-primary" style="margin-right: 10px">Create</button>
-    <a routerLink="" type="submit" class="btn btn-info">Cancel</a>
+    <button type="submit" class="btn btn-primary" style="margin-right: 10px">Thêm</button>
+    <a routerLink="" type="submit" class="btn btn-info">Hủy bỏ</a>
   </form>
 </div>
